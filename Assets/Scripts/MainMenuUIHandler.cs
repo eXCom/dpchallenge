@@ -28,7 +28,8 @@ public class MainMenuUIHandler : MonoBehaviour
     {
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.SaveUser(userName.text);
+            PlayerManager.Instance.UserName = userName.text;
+            //PlayerManager.Instance.SaveUser(userName.text);
             SceneManager.LoadScene("main");
         }
         else

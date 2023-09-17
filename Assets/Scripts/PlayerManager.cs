@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(Application.persistentDataPath + "/savefile.json");
+        //Debug.Log(Application.persistentDataPath + "/savefile.json");
         //Debug.Log("PlayerManager Awake() is called");
         // start of new code
         if (Instance != null)
@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        LoadUser();
+        //LoadUser();
     }
 
     [System.Serializable]
