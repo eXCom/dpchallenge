@@ -24,7 +24,8 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreText.text = $"Score : {PlayerManager.Instance.UserName} {m_Points}";
+        BestScoreText.text = $"Best Score : {PlayerManager.Instance.TopPlayerName} : {PlayerManager.Instance.TopPlayerScore}";
+        ScoreText.text = $"Score : {PlayerManager.Instance.CurrentPlayerName} {m_Points}";
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
 
@@ -68,12 +69,13 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score {PlayerManager.Instance.UserName}: {m_Points}";
+        ScoreText.text = $"Score {PlayerManager.Instance.CurrentPlayerName}: {m_Points}";
     }
 
     public void GameOver()
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        PlayerManager.Instance.SaveTopPlayer(PlayerManager.Instance.CurrentPlayerName, m_Points);
     }
 }

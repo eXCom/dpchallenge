@@ -11,11 +11,17 @@ using UnityEngine.UI;
 public class MainMenuUIHandler : MonoBehaviour
 {
     public TextMeshProUGUI userName;
+    public TextMeshProUGUI userBestScore;
+    public static PlayerManager Instance;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (PlayerManager.Instance != null)
+        {
+            //Debug.Log("Player instance is not null");
+            userBestScore.text = $"Best Score: {PlayerManager.Instance.TopPlayerName} : {PlayerManager.Instance.TopPlayerScore}";
+        }
     }
 
     // Update is called once per frame
@@ -28,7 +34,7 @@ public class MainMenuUIHandler : MonoBehaviour
     {
         if (PlayerManager.Instance != null)
         {
-            PlayerManager.Instance.UserName = userName.text;
+            PlayerManager.Instance.CurrentPlayerName = userName.text;
             //PlayerManager.Instance.SaveUser(userName.text);
             SceneManager.LoadScene("main");
         }

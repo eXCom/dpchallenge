@@ -8,7 +8,10 @@ using System.IO;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    public string UserName; // new variable declared
+    public string TopPlayerName; // top player name
+    public int TopPlayerScore; // top player score
+    public string CurrentPlayerName; // current player name
+    public int CurrentPlayerScore; // current player score
 
     private void Awake()
     {
@@ -24,27 +27,28 @@ public class PlayerManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        //LoadUser();
+        LoadTopPlayer();
     }
 
     [System.Serializable]
     class SaveData
     {
-        public string userName;
+        public string topPlayerName;
+        public int topPlayerScore;
     }
 
-    public void SaveUser(string userName)
+    public void SaveTopPlayer(string topPlayerName, int topPlayerScore)
     {
-        UserName = userName;
         SaveData data = new SaveData();
-        data.userName = userName;
+        data.topPlayerName = topPlayerName;
+        data.topPlayerScore = topPlayerScore;
 
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
-    public void LoadUser()
+    public void LoadTopPlayer()
     {
         string path = Application.persistentDataPath + "/savefile.json";
         if (File.Exists(path))
@@ -52,7 +56,8 @@ public class PlayerManager : MonoBehaviour
             string json = File.ReadAllText(path);
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
-            UserName = data.userName;
+            TopPlayerName = data.topPlayerName;
+            TopPlayerScore = data.topPlayerScore;
         }
     }
 }
