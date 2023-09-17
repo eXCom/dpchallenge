@@ -10,6 +10,8 @@ using UnityEngine.UI;
 [DefaultExecutionOrder(1000)]
 public class MainMenuUIHandler : MonoBehaviour
 {
+    public GameObject MainMenuElementsCanvas;
+    public GameObject LeaderboardCanvas;
     public TextMeshProUGUI userName;
     public TextMeshProUGUI userBestScore;
     public static PlayerManager Instance;
@@ -44,5 +46,17 @@ public class MainMenuUIHandler : MonoBehaviour
         }
 
         //Debug.Log(userName.text);
+    }
+
+    public void DisplayLeaderboard()
+    {
+        MainMenuElementsCanvas.SetActive(false);
+        LeaderboardCanvas.SetActive(true);
+    }
+
+    public void BackToMenuFromLeaderboard()
+    {
+        MainMenuElementsCanvas.SetActive(true);
+        LeaderboardCanvas.SetActive(false);
     }
 }
