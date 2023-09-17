@@ -37,15 +37,18 @@ public class PlayerManager : MonoBehaviour
         public int topPlayerScore;
     }
 
-    public void SaveTopPlayer(string topPlayerName, int topPlayerScore)
+    public void SaveTopPlayer(string currentPlayerName, int currentPlayerScore)
     {
-        SaveData data = new SaveData();
-        data.topPlayerName = topPlayerName;
-        data.topPlayerScore = topPlayerScore;
+        if(currentPlayerScore > TopPlayerScore)
+        {
+            SaveData data = new SaveData();
+            data.topPlayerName = currentPlayerName;
+            data.topPlayerScore = currentPlayerScore;
 
-        string json = JsonUtility.ToJson(data);
+            string json = JsonUtility.ToJson(data);
 
-        File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+            File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
+        }
     }
 
     public void LoadTopPlayer()
