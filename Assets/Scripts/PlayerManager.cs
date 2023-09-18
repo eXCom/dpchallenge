@@ -13,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     public int TopPlayerScore; // top player score
     public string CurrentPlayerName; // current player name
     public int CurrentPlayerScore; // current player score
-    private int maxLeaderboardPlayersAmount = 2;
+    private int maxLeaderboardPlayersAmount = 10;
 
     private void Awake()
     {
