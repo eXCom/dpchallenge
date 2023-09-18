@@ -93,11 +93,21 @@ public class PlayerManager : MonoBehaviour
 
         if (File.Exists(pathToLeaderboardFile))
         {
-            string json = File.ReadAllText(pathToLeaderboardFile);
-            LeaderboardData data = JsonUtility.FromJson<LeaderboardData>(json);
+            string loadedJson = File.ReadAllText(pathToLeaderboardFile);
+            LeaderboardDataList lbList = JsonUtility.FromJson<LeaderboardDataList>(loadedJson);
 
-            TopPlayerName = data.name;
-            TopPlayerScore = data.score;
+            if (lbList.LeaderboardList.Count > 0)
+            {
+                TopPlayerName = lbList.LeaderboardList[0].name;
+                TopPlayerScore = lbList.LeaderboardList[0].score;
+                Debug.Log($"Top player name is {TopPlayerName} with the score {TopPlayerScore}");
+            }
+            else
+            {
+                TopPlayerName = "";
+                TopPlayerScore = 0;
+            }
+                
         }
     }
 }
