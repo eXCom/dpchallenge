@@ -6,6 +6,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif 
 
 // Sets the script to be executed later than all default scripts
 // This is helpful for UI, since other things may need to be initialized before setting the UI
@@ -41,15 +44,12 @@ public class MainMenuUIHandler : MonoBehaviour
         if (PlayerManager.Instance != null)
         {
             PlayerManager.Instance.CurrentPlayerName = userName.text;
-            //PlayerManager.Instance.SaveUser(userName.text);
             SceneManager.LoadScene("main");
         }
         else
         {
             Debug.LogError("PlayerManager.Instance is null.");
         }
-
-        //Debug.Log(userName.text);
     }
 
     public void DisplayLeaderboard()
@@ -98,8 +98,15 @@ public class MainMenuUIHandler : MonoBehaviour
 
                 index++;
             }
-        }
+        }    
+    }
 
-            
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+            EditorApplication.ExitPlaymode();
+        #else
+            Application.Quit(); // original code to quit Unity player
+        #endif
     }
 }

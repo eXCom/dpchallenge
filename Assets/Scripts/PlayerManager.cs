@@ -17,15 +17,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        //Debug.Log(Application.persistentDataPath + "/savefile.json");
-        //Debug.Log("PlayerManager Awake() is called");
-        // start of new code
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        // end of new code
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -41,7 +37,6 @@ public class PlayerManager : MonoBehaviour
             // Load the JSON data from the file (optional)
             string loadedJson = File.ReadAllText(pathToLeaderboardFile);
             LeaderboardDataList lbList = JsonUtility.FromJson<LeaderboardDataList>(loadedJson);
-            //Debug.Log(lbList.LeaderboardList.Count);
 
             if (lbList.LeaderboardList.Count < maxLeaderboardPlayersAmount)
             {
@@ -64,7 +59,7 @@ public class PlayerManager : MonoBehaviour
                 foreach (var player in lbList.LeaderboardList)
                 {
                     newLbList.Add(new LeaderboardData { name = player.name.Trim(), score = player.score });
-                    //Debug.Log("Player: " + player.name + ", Score: " + player.score);
+
                     if (player.score < lowestScore)
                     {
                         lowestScore = player.score;
@@ -74,7 +69,6 @@ public class PlayerManager : MonoBehaviour
 
                 if (playerWithLowestScore != null)
                 {
-                    Debug.Log($"There is a player to be deleted with a name {playerWithLowestScore.name} and score {playerWithLowestScore.score}");
                     newLbList.Remove(playerWithLowestScore);
                 }
                 newLbList.Add(new LeaderboardData { name = currentPlayerName.Trim(), score = currentPlayerScore });
