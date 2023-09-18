@@ -100,7 +100,6 @@ public class PlayerManager : MonoBehaviour
             {
                 TopPlayerName = lbList.LeaderboardList[0].name;
                 TopPlayerScore = lbList.LeaderboardList[0].score;
-                Debug.Log($"Top player name is {TopPlayerName} with the score {TopPlayerScore}");
             }
             else
             {
